@@ -1,5 +1,5 @@
 # generate a github action to build alpine docker image
-# and push to ghcr.io/vertisky/devcontainers
+# and push to etma/devcontainer
 name: Alpine-Golang
 on:
   push:
@@ -37,7 +37,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Alpine
-        run: docker build --build-arg GO_VERSIONS=latest -t ghcr.io/vertisky/devcontainer:golang-alpine -f ./containers/alpine.Dockerfile .
+        run: docker build --build-arg GO_VERSIONS=latest -t etma/devcontainer:golang-alpine -f ./containers/alpine.Dockerfile .
 
   publish:
     runs-on: ubuntu-latest
@@ -101,6 +101,6 @@ jobs:
             VERSION=${{ steps.vars.outputs.version }}
             GO_VERSIONS=${{ steps.vars.outputs.go_versions }}
           tags: |
-            ghcr.io/vertisky/devcontainers:golang
-            ghcr.io/vertisky/devcontainers:${{ steps.vars.outputs.version }}
-            ghcr.io/vertisky/devcontainers:${{ steps.vars.outputs.alpine_version }}
+            etma/devcontainer:golang
+            etma/devcontainer:${{ steps.vars.outputs.version }}
+            etma/devcontainer:${{ steps.vars.outputs.alpine_version }}

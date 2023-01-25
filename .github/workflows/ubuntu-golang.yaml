@@ -1,5 +1,5 @@
 # generate a github action to build ubuntu docker image
-# and push to ghcr.io/vertisky/devcontainers
+# and push to etma/devcontainer
 name: Ubuntu-Golang
 on:
   push:
@@ -36,7 +36,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Ubuntu
-        run: docker build --build-arg GO_VERSION=latest -t ghcr.io/vertisky/devcontainer:golang-ubuntu -f ./containers/ubuntu.Dockerfile .
+        run: docker build --build-arg GO_VERSION=latest -t etma/devcontainer:golang-ubuntu -f ./containers/ubuntu.Dockerfile .
   gather:
     runs-on: ubuntu-latest
     outputs:
@@ -139,7 +139,7 @@ jobs:
             VERSION=${{ steps.vars.outputs.version }}
             GO_VERSION=${{ matrix.go-version }}
           tags: |
-            ghcr.io/vertisky/devcontainers-go:${{ steps.vars.outputs.version }}
-            ghcr.io/vertisky/devcontainers-go:${{ steps.vars.outputs.ubuntu_version }}
+            etma/devcontainer-go:${{ steps.vars.outputs.version }}
+            etma/devcontainer-go:${{ steps.vars.outputs.ubuntu_version }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max

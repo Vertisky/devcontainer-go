@@ -1,7 +1,7 @@
 ARG BASE_VERSION=v0.3.0
 ARG GO_VERSION=latest
 
-FROM ghcr.io/vertisky/devcontainers-base:ubuntu-${BASE_VERSION}
+FROM etma/devcontainer-base:ubuntu-${BASE_VERSION}
 ARG VERSION
 ARG COMMIT
 ARG BUILD_DATE
