@@ -72,6 +72,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: ['verify', 'gather']
     if: github.event_name == 'push'
+    permissions:
+      packages: write
     strategy:
       max-parallel: 10
       matrix:

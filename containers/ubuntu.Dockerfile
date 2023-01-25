@@ -9,11 +9,11 @@ ARG BASE_VERSION
 ARG GO_VERSION
 
 LABEL \
-    org.opencontainers.image.title="GoDevContainer" \
+    org.opencontainers.image.title="DevContainer for golang" \
     org.opencontainers.image.description="Ubuntu Golang image for dev containers." \
-    org.opencontainers.image.url="https://github.com/vertisky/devcontainers" \
-    org.opencontainers.image.documentation="https://github.com/vertisky/devcontainers" \
-    org.opencontainers.image.source="https://github.com/vertisky/devcontainers" \
+    org.opencontainers.image.url="https://github.com/vertisky/devcontainers-go" \
+    org.opencontainers.image.documentation="https://github.com/vertisky/devcontainers-go" \
+    org.opencontainers.image.source="https://github.com/vertisky/devcontainers-go" \
     org.opencontainers.image.vendor="vertisky" \
     org.opencontainers.image.authors="etma@vertisky.com" \
     org.opencontainers.image.licenses="MIT" \
