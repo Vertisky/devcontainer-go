@@ -5,17 +5,17 @@ on:
   push:
     paths:
       - .github/workflows/alpine-golang.yaml
-      - containers/dev/golang/alpine.Dockerfile
+      - containers/alpine.Dockerfile
       - containers/base/alpine.Dockerfile
       - .dockerignore
-      - containers/dev/golang/shell/**
+      - containers/shell/**
   pull_request:
     paths:
       - .github/workflows/alpine-golang.yaml
-      - containers/dev/golang/alpine.Dockerfile
+      - containers/alpine.Dockerfile
       - containers/base/alpine.Dockerfile
       - .dockerignore
-      - containers/dev/golang/shell/**
+      - containers/shell/**
 
 jobs:
   verify:
@@ -37,7 +37,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Alpine
-        run: docker build --build-arg GO_VERSIONS=latest -t ghcr.io/vertisky/devcontainer:golang-alpine -f ./containers/dev/golang/alpine.Dockerfile .
+        run: docker build --build-arg GO_VERSIONS=latest -t ghcr.io/vertisky/devcontainer:golang-alpine -f ./containers/alpine.Dockerfile .
 
   publish:
     runs-on: ubuntu-latest
@@ -92,7 +92,7 @@ jobs:
         if: ${{ steps.vars.outputs.main }}
         with:
           context: .
-          file: ./containers/dev/golang/alpine.Dockerfile
+          file: ./containers/alpine.Dockerfile
           platforms: ${{ steps.vars.outputs.platforms }}
           push: true
           build-args: |
