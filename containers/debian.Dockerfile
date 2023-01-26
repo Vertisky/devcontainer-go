@@ -1,4 +1,4 @@
-ARG BASE_VERSION=v1.0.0
+ARG BASE_VERSION=v1.0.1
 ARG GO_VERSION=latest
 
 FROM etma/devcontainer-base:debian-${BASE_VERSION}
