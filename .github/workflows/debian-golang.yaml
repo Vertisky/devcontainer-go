@@ -109,17 +109,17 @@ jobs:
           if [ "$TAG" != "$GITHUB_REF" ]; then
             echo version=debian-latest-$TAG >> $GITHUB_OUTPUT
             echo debian_version=debian-$TAG >> $GITHUB_OUTPUT
-            echo platforms=linux/amd64 >> $GITHUB_OUTPUT
+            echo platforms=linux/amd64,linux/arm64 >> $GITHUB_OUTPUT
             echo main=true >> $GITHUB_OUTPUT
           elif [ "$BRANCH" = "main" ]; then
             echo version=debian-latest >> $GITHUB_OUTPUT
             echo debian_version=debian >> $GITHUB_OUTPUT
-            echo platforms=linux/amd64 >> $GITHUB_OUTPUT
+            echo platforms=linux/amd64,linux/arm64 >> $GITHUB_OUTPUT
             echo main=true >> $GITHUB_OUTPUT
           else
             echo version=debian-latest-$BRANCH >> $GITHUB_OUTPUT
             echo debian_version=debian-$BRANCH >> $GITHUB_OUTPUT
-            echo platforms=linux/amd64 >> $GITHUB_OUTPUT
+            echo platforms=linux/amd64,linux/arm64 >> $GITHUB_OUTPUT
             echo main=false >> $GITHUB_OUTPUT
           fi
 
@@ -187,17 +187,17 @@ jobs:
           if [ "$TAG" != "$GITHUB_REF" ]; then
             echo version=${{ matrix.go-version }}-$TAG >> $GITHUB_OUTPUT
             echo debian_version=${{ matrix.go-version }}-debian-$TAG >> $GITHUB_OUTPUT
-            echo platforms=linux/amd64 >> $GITHUB_OUTPUT
+            echo platforms=linux/amd64,linux/arm64 >> $GITHUB_OUTPUT
             echo main=true >> $GITHUB_OUTPUT
           elif [ "$BRANCH" = "main" ]; then
             echo version=${{ matrix.go-version }}-debian-latest >> $GITHUB_OUTPUT
             echo debian_version=${{ matrix.go-version }}-debian >> $GITHUB_OUTPUT
-            echo platforms=linux/amd64 >> $GITHUB_OUTPUT
+            echo platforms=linux/amd64,linux/arm64 >> $GITHUB_OUTPUT
             echo main=true >> $GITHUB_OUTPUT
           else
             echo version=${{ matrix.go-version }}-$BRANCH >> $GITHUB_OUTPUT
             echo debian_version=${{ matrix.go-version }}-debian-$BRANCH >> $GITHUB_OUTPUT
-            echo platforms=linux/amd64 >> $GITHUB_OUTPUT
+            echo platforms=linux/amd64,linux/arm64 >> $GITHUB_OUTPUT
             echo main=false >> $GITHUB_OUTPUT
           fi
 
