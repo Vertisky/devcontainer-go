@@ -1,7 +1,7 @@
 ARG BASE_VERSION=v1.2.1
 ARG GO_VERSION=latest
 
-FROM etma/devcontainer-base:ubuntu-${BASE_VERSION}
+FROM etma/devcontainer-kube:debian-${BASE_VERSION}
 ARG VERSION
 ARG COMMIT
 ARG BUILD_DATE
@@ -10,7 +10,7 @@ ARG GO_VERSION
 
 LABEL \
     org.opencontainers.image.title="DevContainer for golang" \
-    org.opencontainers.image.description="Ubuntu Golang image for dev containers." \
+    org.opencontainers.image.description="Debian Golang image for dev containers." \
     org.opencontainers.image.url="https://github.com/vertisky/devcontainers-go" \
     org.opencontainers.image.documentation="https://github.com/vertisky/devcontainers-go" \
     org.opencontainers.image.source="https://github.com/vertisky/devcontainers-go" \

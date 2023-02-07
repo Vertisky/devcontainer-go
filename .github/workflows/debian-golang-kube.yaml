@@ -4,14 +4,14 @@ name: Debian-Golang
 on:
   push:
     paths:
-      - .github/workflows/debian-golang.yaml
-      - containers/debian.Dockerfile
+      - .github/workflows/debian-golang-kube.yaml
+      - containers/debian-kube.Dockerfile
       - .dockerignore
       - containers/shell/**
   pull_request:
     paths:
-      - .github/workflows/debian-golang.yaml
-      - containers/debian.Dockerfile
+      - .github/workflows/debian-golang-kube.yaml
+      - containers/debian-kube.Dockerfile
       - .dockerignore
       - containers/shell/**
 
@@ -66,7 +66,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Debian
-        run: docker build --build-arg GO_VERSION=latest -t etma/devcontainer-go:debian -f ./containers/debian.Dockerfile .
+        run: docker build --build-arg GO_VERSION=latest -t etma/devcontainer-go:debian-kube -f ./containers/debian-kube.Dockerfile .
 
   latest:
     runs-on: ubuntu-latest
@@ -107,18 +107,18 @@ jobs:
           echo commit=$(git rev-parse --short HEAD) >> $GITHUB_OUTPUT
           echo created=$(date -u +%Y-%m-%dT%H:%M:%SZ) >> $GITHUB_OUTPUT
           if [ "$TAG" != "$GITHUB_REF" ]; then
-            echo version=debian-latest-$TAG >> $GITHUB_OUTPUT
-            echo debian_version=debian-$TAG >> $GITHUB_OUTPUT
+            echo version=debian-kube-latest-$TAG >> $GITHUB_OUTPUT
+            echo debian_version=debian-kube-$TAG >> $GITHUB_OUTPUT
             echo platforms=linux/amd64,linux/arm64 >> $GITHUB_OUTPUT
             echo main=true >> $GITHUB_OUTPUT
           elif [ "$BRANCH" = "main" ]; then
-            echo version=debian-latest >> $GITHUB_OUTPUT
-            echo debian_version=debian >> $GITHUB_OUTPUT
+            echo version=debian-kube-latest >> $GITHUB_OUTPUT
+            echo debian_version=debian-kube >> $GITHUB_OUTPUT
             echo platforms=linux/amd64,linux/arm64 >> $GITHUB_OUTPUT
             echo main=true >> $GITHUB_OUTPUT
           else
-            echo version=debian-latest-$BRANCH >> $GITHUB_OUTPUT
-            echo debian_version=debian-$BRANCH >> $GITHUB_OUTPUT
+            echo version=debian-kube-latest-$BRANCH >> $GITHUB_OUTPUT
+            echo debian_version=debian-kube-$BRANCH >> $GITHUB_OUTPUT
             echo platforms=linux/amd64,linux/arm64 >> $GITHUB_OUTPUT
             echo main=false >> $GITHUB_OUTPUT
           fi
@@ -185,18 +185,18 @@ jobs:
           echo commit=$(git rev-parse --short HEAD) >> $GITHUB_OUTPUT
           echo created=$(date -u +%Y-%m-%dT%H:%M:%SZ) >> $GITHUB_OUTPUT
           if [ "$TAG" != "$GITHUB_REF" ]; then
-            echo version=${{ matrix.go-version }}-$TAG >> $GITHUB_OUTPUT
-            echo debian_version=${{ matrix.go-version }}-debian-$TAG >> $GITHUB_OUTPUT
+            echo version=${{ matrix.go-version }}-debian-kube-$TAG >> $GITHUB_OUTPUT
+            echo debian_version=${{ matrix.go-version }}-debian-kube-$TAG >> $GITHUB_OUTPUT
             echo platforms=linux/amd64,linux/arm64 >> $GITHUB_OUTPUT
             echo main=true >> $GITHUB_OUTPUT
           elif [ "$BRANCH" = "main" ]; then
-            echo version=${{ matrix.go-version }}-debian-latest >> $GITHUB_OUTPUT
-            echo debian_version=${{ matrix.go-version }}-debian >> $GITHUB_OUTPUT
+            echo version=${{ matrix.go-version }}-debian-kube-latest >> $GITHUB_OUTPUT
+            echo debian_version=${{ matrix.go-version }}-debian-kube >> $GITHUB_OUTPUT
             echo platforms=linux/amd64,linux/arm64 >> $GITHUB_OUTPUT
             echo main=true >> $GITHUB_OUTPUT
           else
-            echo version=${{ matrix.go-version }}-$BRANCH >> $GITHUB_OUTPUT
-            echo debian_version=${{ matrix.go-version }}-debian-$BRANCH >> $GITHUB_OUTPUT
+            echo version=${{ matrix.go-version }}-debian-kube-$BRANCH >> $GITHUB_OUTPUT
+            echo debian_version=${{ matrix.go-version }}-debian-kube-$BRANCH >> $GITHUB_OUTPUT
             echo platforms=linux/amd64,linux/arm64 >> $GITHUB_OUTPUT
             echo main=false >> $GITHUB_OUTPUT
           fi
@@ -206,7 +206,7 @@ jobs:
         if: ${{ steps.vars.outputs.main }}
         with:
           context: .
-          file: ./containers/debian.Dockerfile
+          file: ./containers/debian-kube.Dockerfile
           platforms: ${{ steps.vars.outputs.platforms }}
           push: true
           build-args: |

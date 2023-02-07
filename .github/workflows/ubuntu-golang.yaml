@@ -36,7 +36,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Ubuntu
-        run: docker build --build-arg GO_VERSION=latest -t etma/devcontainer:golang-ubuntu -f ./containers/ubuntu.Dockerfile .
+        run: docker build --build-arg GO_VERSION=latest -t etma/devcontainer-go:ubuntu -f ./containers/ubuntu.Dockerfile .
   gather:
     runs-on: ubuntu-latest
     outputs:

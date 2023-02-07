@@ -1,7 +1,7 @@
 ARG BASE_VERSION=v1.2.1
 ARG GO_VERSION=latest
 
-FROM etma/devcontainer-base:ubuntu-${BASE_VERSION}
+FROM etma/devcontainer-kube:ubuntu-${BASE_VERSION}
 ARG VERSION
 ARG COMMIT
 ARG BUILD_DATE
