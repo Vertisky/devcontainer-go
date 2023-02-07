@@ -29,3 +29,7 @@ RUN PATH=$PATH:/root/.asdf/bin && \
 # install golangci-lint
 RUN PATH=$PATH:/root/.asdf/bin:/root/.asdf/shims && \
     curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.50.1
+
+# install gopls
+RUN PATH=$PATH:/root/.asdf/bin:/root/.asdf/shims && \
+    go get golang.org/x/tools/gopls@latest
