@@ -33,4 +33,4 @@ RUN PATH=$PATH:/root/.asdf/bin:/root/.asdf/shims && \
 
 # install gopls
 RUN PATH=$PATH:/root/.asdf/bin:/root/.asdf/shims && \
-    go get golang.org/x/tools/gopls@latest
+    go install golang.org/x/tools/gopls@latest
