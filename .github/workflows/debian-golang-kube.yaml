@@ -1,6 +1,6 @@
 # generate a github action to build debian docker image
 # and push to etma/devcontainer
-name: Debian-Golang
+name: Debian-Golang-kube
 on:
   push:
     paths:
