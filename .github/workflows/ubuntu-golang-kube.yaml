@@ -64,6 +64,8 @@ jobs:
           ./.asdf/bin/asdf list all golang | sort -V | while read line ; do
               if is-at-least 1.19.0 $line; then
                 if [[ $line =~ (rc|beta|alpha) ]]; then
+                  continue
+                else
                   versions+=("$line")
                 fi
               fi
