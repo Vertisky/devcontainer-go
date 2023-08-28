@@ -42,7 +42,9 @@ jobs:
           versions=()
           ./.asdf/bin/asdf list all golang | sort -V | while read line ; do
               if is-at-least 1.19.0 $line; then
+                if [[ $line =~ (rc|beta|alpha) ]]; then
                   versions+=("$line")
+                fi
               fi
           done
           echo "go-versions=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${versions[@]}")" >> $GITHUB_OUTPUT
