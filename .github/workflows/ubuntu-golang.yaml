@@ -2,6 +2,8 @@
 # and push to etma/devcontainer
 name: Ubuntu-Golang
 on:
+  schedule:
+    - cron: '1 0 * * *'
   push:
     paths:
       - .github/workflows/ubuntu-golang.yaml

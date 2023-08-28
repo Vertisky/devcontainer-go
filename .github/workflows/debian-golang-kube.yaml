@@ -2,6 +2,8 @@
 # and push to etma/devcontainer
 name: Debian-Golang-kube
 on:
+  schedule:
+    - cron: '1 0 * * *'
   push:
     paths:
       - .github/workflows/debian-golang-kube.yaml
