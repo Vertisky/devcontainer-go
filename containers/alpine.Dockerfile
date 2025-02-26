@@ -1,5 +1,7 @@
-ARG BASE_VERSION=v1.2.1
-ARG GO_VERSION=latest
+ARG BASE_VERSION=v2.0.3
+ARG GO_VERSION=alpine
+
+FROM golang:${GO_VERSION} AS go
 
 FROM etma/devcontainer-base:alpine-${BASE_VERSION}
 ARG VERSION
@@ -21,15 +23,20 @@ LABEL \
     org.opencontainers.image.revision=$COMMIT \
     org.opencontainers.image.created=$BUILD_DATE
 
-RUN PATH=$PATH:/root/.asdf/bin && \
-    /root/.asdf/bin/asdf plugin add golang && \
-    /root/.asdf/bin/asdf install golang $GO_VERSION && \
-    /root/.asdf/bin/asdf global golang $GO_VERSION
 
-# install golangci-lint
-RUN PATH=$PATH:/root/.asdf/bin:/root/.asdf/shims && \
-    curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.50.1
+    COPY --from=go /usr/local/go /usr/local/go
 
-# install gopls
-RUN PATH=$PATH:/root/.asdf/bin:/root/.asdf/shims && \
-    go install golang.org/x/tools/gopls@latest
+    # Set GOROOT and update PATH
+    ENV GOROOT=/usr/local/go
+    ENV PATH="${GOROOT}/bin:${PATH}"
+    
+    
+    # install golangci-lint
+    RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.64.5
+    
+    # install gopls
+    RUN go install golang.org/x/tools/gopls@latest
+    
+    # cleanup
+    RUN rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
+    RUN go clean -cache -modcache -testcache -fuzzcache && rm -rf $(go env GOCACHE) $(go env GOMODCACHE)
